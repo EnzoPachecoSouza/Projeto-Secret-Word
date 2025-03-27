@@ -1,9 +1,11 @@
 import './App.css'
 
+import StartScreen from './components/StartScreen/StartScreen'
+
 function App() {
   return (
     <div className='app'>
-      <h1>Secret Word</h1>
+        <StartScreen />
     </div>
   )
 }
