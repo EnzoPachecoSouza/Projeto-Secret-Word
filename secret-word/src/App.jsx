@@ -23,11 +23,25 @@ function App() {
   const [gameStage, setGameStage] = useState(stages[0].name)
   const [words] = useState(wordsList)
 
+  //START GAME
+  const startGame = () =>{
+    setGameStage(stages[1].name)
+  }
+
+  //VERIFICAR LETRAS DO INPUT
+  const verifyLetter = () => {
+    setGameStage(stages[2].name)
+  }
+
+  //END GAME
+  const endGame = () => {
+    setGameStage(stages[0].name)
+  }
   return (
     <div className='app'>
-      {gameStage === 'start' && <StartScreen />}
-      {gameStage === 'game' && <Game />}
-      {gameStage === 'end' && <GameOver />}
+      {gameStage === 'start' && <StartScreen startGame={startGame} />}
+      {gameStage === 'game' && <Game verifyLetter={verifyLetter}/>}
+      {gameStage === 'end' && <GameOver endGame={endGame}/>}
     </div>
   )
 }
