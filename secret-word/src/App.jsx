@@ -2,7 +2,7 @@
 import './App.css'
 
 //REACT HOOKS
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 
 //DATA
 import { wordsList } from './data/words'
@@ -82,11 +82,28 @@ function App() {
       setWrongLetters(actualGuessedLetters => [
         ...actualGuessedLetters, normalizedLetter
       ])
+
+      setGuesses((actualGuesses) => actualGuesses - 1)
     }
+  };
+
+  const clearLetterStates = () => {
+    setGuessedLetters([])
+    setWrongLetters([])
   }
+
+  useEffect(() => {
+    if (guesses === 0) {
+      clearLetterStates();
+
+      setGameStage(stages[2].name)
+    }
+  }, [guesses])
 
   //END GAME
   const endGame = () => {
+    setScore(0)
+    setGuesses(5)
     setGameStage(stages[0].name)
   }
   return (
