@@ -48,6 +48,8 @@ function App() {
 
   //START GAME
   const startGame = () => {
+    clearLetterStates()
+
     const { word, category } = pickWordAndCategory()
 
     //SEPARANDO AS LETRAS POR ESPAÇO
@@ -100,6 +102,19 @@ function App() {
     }
   }, [guesses])
 
+  useEffect(() => {
+    const uniqueLetters = [...new Set(letters)]
+
+    //SE TODAS AS LETRAS FORAM ALCANÇADAS, VENCEDOR
+    if (guessedLetters.length === uniqueLetters.length) {
+      //ADICIONAR PONTOS
+      setScore((actualScore) => actualScore += 100)
+
+      //REINICIAR O JOGO    
+      startGame()
+    }
+  },[guessedLetters, letters, startGame])
+
   //END GAME
   const endGame = () => {
     setScore(0)
@@ -117,6 +132,7 @@ function App() {
         guessedLetters={guessedLetters}
         wrongLetters={wrongLetters}
         guesses={guesses}
+        score={score}
       />}
       {gameStage === 'end' && <GameOver endGame={endGame} score={score}/>}
     </div>
