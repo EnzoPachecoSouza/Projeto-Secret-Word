@@ -67,7 +67,22 @@ function App() {
 
   //VERIFICAR LETRAS DO INPUT
   const verifyLetter = (letter) => {
-    
+    const normalizedLetter = letter.toUpperCase()
+
+    //CHECAR SE A LETRA JA FOI USADA
+    if (guessedLetters.includes(normalizedLetter) || wrongLetters.includes(normalizedLetter)) {
+      return
+    }
+
+    if(letters.includes(normalizedLetter)) {
+      setGuessedLetters((actualGuessedLetters) => [
+        ...actualGuessedLetters, normalizedLetter
+      ])
+    }else{
+      setWrongLetters(actualGuessedLetters => [
+        ...actualGuessedLetters, normalizedLetter
+      ])
+    }
   }
 
   //END GAME
