@@ -66,8 +66,8 @@ function App() {
   }
 
   //VERIFICAR LETRAS DO INPUT
-  const verifyLetter = () => {
-    setGameStage(stages[2].name)
+  const verifyLetter = (letter) => {
+    
   }
 
   //END GAME
