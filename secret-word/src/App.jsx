@@ -2,7 +2,7 @@
 import './App.css'
 
 //REACT HOOKS
-import { useState, useCallback , useEffect } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 
 //DATA
 import { wordsList } from './data/words'
@@ -27,6 +27,11 @@ function App() {
   const [pikedCategory, setPickedCategory] = useState("")
   const [letters, setLetters] = useState([])
 
+  const [guessedLetters, setGuessedLetters] = useState([])
+  const [wrongLetters, setWrongLetters] = useState([])
+  const [guesses, setGuesses] = useState(5)
+  const [score, setScore] = useState(0)
+
   //PEGAR CATEGORIA E PALAVRA ALEATÓRIA
   const pickWordAndCategory = () => {
     const categories = Object.keys(words);
@@ -38,12 +43,12 @@ function App() {
 
     console.log(word)
 
-    return{word, category}
+    return { word, category }
   }
 
   //START GAME
-  const startGame = () =>{
-    const {word, category} = pickWordAndCategory()
+  const startGame = () => {
+    const { word, category } = pickWordAndCategory()
 
     //SEPARANDO AS LETRAS POR ESPAÇO
     let wordLetters = word.split('')
@@ -72,8 +77,16 @@ function App() {
   return (
     <div className='app'>
       {gameStage === 'start' && <StartScreen startGame={startGame} />}
-      {gameStage === 'game' && <Game verifyLetter={verifyLetter}/>}
-      {gameStage === 'end' && <GameOver endGame={endGame}/>}
+      {gameStage === 'game' && <Game
+        verifyLetter={verifyLetter}
+        pickedWord={pickedWord}
+        pickedCategory={pikedCategory}
+        letters={letters}
+        guessedLetters={guessedLetters}
+        wrongLetters={wrongLetters}
+        guesses={guesses}
+      />}
+      {gameStage === 'end' && <GameOver endGame={endGame} />}
     </div>
   )
 }
