@@ -20,17 +20,17 @@ const stages = [
 ]
 
 function App() {
-  const [gameStage, setGameStage] = useState(stages[0].name)
-  const [words] = useState(wordsList)
+  const [gameStage, setGameStage] = useState(stages[0].name) // estágio atual do jogo
+  const [words] = useState(wordsList) // lista de palavras
 
-  const [pickedWord, setPickedWord] = useState("")
-  const [pikedCategory, setPickedCategory] = useState("")
-  const [letters, setLetters] = useState([])
+  const [pickedWord, setPickedWord] = useState("") // palavra sorteada
+  const [pikedCategory, setPickedCategory] = useState("") // categoria sorteada
+  const [letters, setLetters] = useState([]) // letras da palavra
 
-  const [guessedLetters, setGuessedLetters] = useState([])
-  const [wrongLetters, setWrongLetters] = useState([])
-  const [guesses, setGuesses] = useState(5)
-  const [score, setScore] = useState(0)
+  const [guessedLetters, setGuessedLetters] = useState([]) // letras corretas que o usuário acertou
+  const [wrongLetters, setWrongLetters] = useState([]) // letras erradas que o usuário digitou
+  const [guesses, setGuesses] = useState(5) // tentativas restantes
+  const [score, setScore] = useState(0) // pontuação
 
   //PEGAR CATEGORIA E PALAVRA ALEATÓRIA
   const pickWordAndCategory = () => {
@@ -48,7 +48,7 @@ function App() {
 
   //START GAME
   const startGame = () => {
-    clearLetterStates()
+    clearLetterStates() // limpa letras
 
     const { word, category } = pickWordAndCategory()
 
@@ -64,7 +64,7 @@ function App() {
     setPickedCategory(category)
     setLetters(wordLetters)
 
-    setGameStage(stages[1].name)
+    setGameStage(stages[1].name) // muda o estado do jogo para "game"
   }
 
   //VERIFICAR LETRAS DO INPUT
